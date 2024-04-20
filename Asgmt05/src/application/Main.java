@@ -15,9 +15,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             // Loads the home-page/welcome page
-            FXMLLoader welcomeLoader = new FXMLLoader(getClass().getResource("/view/welcome.fxml"));
+            FXMLLoader welcomeLoader = new FXMLLoader(getClass().getResource("/view/Welcome.fxml"));
             Parent welcomeRoot = welcomeLoader.load(); // Loads the FXML file into a Parent node
-            WelcomeController welcomeController = welcomeLoader.getController(); // Gets the controller associated with the FXML file
+            //WelcomeController welcomeController = welcomeLoader.getController(); // Gets the controller associated with the FXML file
             Scene welcomeScene = new Scene(welcomeRoot, 629, 477); // Creates a new scene with the loaded root node and set its dimensions
 
             // Show the home-page/ welcome scene initially

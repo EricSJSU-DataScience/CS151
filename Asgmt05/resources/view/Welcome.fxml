@@ -45,21 +45,16 @@
          <effect>
             <DropShadow />
          </effect></Button>
-    <Button layoutX="343.0" layoutY="238.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="189.0" style="-fx-background-color: lightblue;" text="Add New Asset">
+      <ComboBox layoutX="324.0" layoutY="25.0" prefHeight="43.0" prefWidth="227.0" promptText="Select" style="-fx-background-color: white;" />
+      <Button layoutX="343.0" layoutY="172.0" mnemonicParsing="false" onAction="#goToSearchPage" prefHeight="43.0" prefWidth="189.0" style="-fx-background-color: lightyellow;" text="Search">
          <effect>
             <DropShadow />
          </effect>
       </Button>
-      <ComboBox layoutX="324.0" layoutY="25.0" prefHeight="43.0" prefWidth="227.0" promptText="Select" style="-fx-background-color: white;" />
       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="343.0" layoutY="107.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="189.0" style="-fx-background-color: violet;" styleClass="gradient" text="Existing Assets">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <Button layoutX="343.0" layoutY="172.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="189.0" style="-fx-background-color: lightyellow;" text="Existing Categories">
          <effect>
             <DropShadow />
          </effect>
@@ -69,5 +64,10 @@
             <DropShadow />
          </effect>
       </Button>
+      <Button layoutX="343.0" layoutY="238.0" mnemonicParsing="false" onAction="#goToAssetPage" prefHeight="43.0" prefWidth="189.0" style="-fx-background-color: lightblue;" text="Add New Asset">
+    <effect>
+        <DropShadow />
+    </effect>
+</Button>
    </children>
 </AnchorPane>
