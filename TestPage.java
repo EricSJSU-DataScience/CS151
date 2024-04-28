@@ -56,7 +56,7 @@ public class TestPage extends VBox implements LayoutHelper {
 		setExample();
 		
 		layout.add(createTitle(title));
-        layout.add(createTextLine(line1, true));
+        layout.add(createTextFieldLine(line1, true));
         layout.add(createDropdownList(line2, category));
         layout.add(createDropdownList(line3, location));
 		

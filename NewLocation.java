@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.Location;
@@ -31,8 +32,8 @@ public class NewLocation extends VBox implements LayoutHelper{
 		layout = new ArrayList<HBox>();
 
 		layout.add(createTitle(title));
-		layout.add(createTextLine(line1, true));
-		layout.add(createTextLine(line2));
+		layout.add(createTextFieldLine(line1, true));
+		layout.add(createTextAreaLine(line2));
 		layout.add(lastLine());
 
 		
@@ -44,7 +45,7 @@ public class NewLocation extends VBox implements LayoutHelper{
 	
 	public void getInfo() {
 		location.setName(((TextField) layout.get(1).lookup("#text")).getText());
-		location.setDesciption(((TextField) layout.get(2).lookup("#text")).getText());
+		location.setDesciption(((TextArea) layout.get(2).lookup("#text")).getText());
 	}
 	
 	private void buttonAction(ArrayList<HBox> arg) {
@@ -60,16 +61,17 @@ public class NewLocation extends VBox implements LayoutHelper{
 			} else {
 				// Save the category name to a .csv file
 				this.getInfo();
-				saveCategoryToCsv();
+				saveToCsv();
 				//clear TextField
-				clearTextField((TextField)arg.get(1).lookup("#text"), (TextField)arg.get(2).lookup("#text"));
+				clearTextField((TextField)arg.get(1).lookup("#text"));
+				clearTextArea((TextArea)arg.get(2).lookup("#text"));
 			}
 			
 		});
 
 	}
 	
-	private void saveCategoryToCsv() {
+	private void saveToCsv() {
 		try {
 			// Check if the file exists
 			if (Files.exists(Paths.get(file))) {
@@ -85,7 +87,7 @@ public class NewLocation extends VBox implements LayoutHelper{
 				}
 
 				// Then append the new category to the file
-				saveCategoryToCsv();
+				saveToCsv();
 				// prevent second msg
 				return;
 			}

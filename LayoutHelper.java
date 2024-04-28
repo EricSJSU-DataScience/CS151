@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -51,7 +52,7 @@ public interface LayoutHelper {
 	public default HBox createTitle(String arg) {
 		HBox title = new HBox();
 		Text titleText = new Text(arg);
-		titleText.setFont(Font.font("Arial", 30));
+		titleText.setFont(Font.font("Helvetica", 30));
 
 		title.getChildren().add(titleText);
 		title.setAlignment(Pos.BASELINE_CENTER);
@@ -65,7 +66,7 @@ public interface LayoutHelper {
 	 */
 	public default Label createLabel(String arg) {
 		Label label = new Label(arg);
-		label.setFont(Font.font("Arial", 20));
+		label.setFont(Font.font("Helvetica", 20));
 		label.setPrefWidth(190);
 		
 		return label;
@@ -76,7 +77,7 @@ public interface LayoutHelper {
 	 * @param must
 	 * @return
 	 */
-	public default HBox createTextLine(String arg, boolean must) {
+	public default HBox createTextFieldLine(String arg, boolean must) {
 		// redAsterisk
 		HBox res = new HBox();
 		if (must) {
@@ -100,8 +101,26 @@ public interface LayoutHelper {
 	 * @param arg
 	 * @return
 	 */
-	public default HBox createTextLine(String arg) {
-		return createTextLine(arg, false);
+	public default HBox createTextFieldLine(String arg) {
+		return createTextFieldLine(arg, false);
+	}
+	public default HBox createTextAreaLine(String arg) {
+		// redAsterisk
+		HBox res = new HBox();
+		
+		res.getChildren().add(emptySpace());
+		
+		// label will use createLabel() function
+		
+		// text field
+		TextArea textField = new TextArea();
+		textField.setId("text");//set id for textField lookup
+		
+		textField.setPrefSize(180, 50);
+
+		res.getChildren().addAll(createLabel(arg), textField);
+		res.setAlignment(Pos.BASELINE_CENTER);
+		return res;
 	}
 	/**
 	 * Create line with drop down list
@@ -179,6 +198,12 @@ public interface LayoutHelper {
 	 */
 	public default void clearTextField(TextField...arg) {
 		for (TextField itr : arg) {
+			itr.clear();
+		}
+	}
+	
+	public default void clearTextArea(TextArea...arg) {
+		for (TextArea itr : arg) {
 			itr.clear();
 		}
 	}

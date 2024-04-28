@@ -13,40 +13,33 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.Location;
+import model.Category;
 
-public class NewLocation extends VBox implements LayoutHelper{
-	private Location location = new Location();
-	private final String file = "location.csv";
-	
-	private ArrayList<HBox> layout;
-	private final String title = "Create New Location";
-	private final String line1 = "Location's name: ";
-	private final String line2 = "Description: ";
+public class NewCategory extends VBox implements LayoutHelper {
+	private Category category = new Category();
+	private final String file = "category.csv";
 
-	public NewLocation() {
+	private ArrayList<HBox> layout = new ArrayList<HBox>();
+	private final String title = "Create New TestPage";
+	private final String line1 = "Category's name: ";
+
+
+	public NewCategory() {
 		super(30); // spacing parameter 30
 		super.setPadding(new Insets(40, 40, 40, 40));
-
-		layout = new ArrayList<HBox>();
-
+ 
 		layout.add(createTitle(title));
-		layout.add(createTextLine(line1, true));
-		layout.add(createTextLine(line2));
+		layout.add(createTextFieldLine(line1, true));
 		layout.add(lastLine());
 
-		
 		initialize(this, layout);
 		
-		clearButtonAction(layout, 1, 2);
+		clearButtonAction(layout, 1);
 		buttonAction(layout);
+		
 	}
 	
-	public void getInfo() {
-		location.setName(((TextField) layout.get(1).lookup("#text")).getText());
-		location.setDesciption(((TextField) layout.get(2).lookup("#text")).getText());
-	}
-	
+	//
 	private void buttonAction(ArrayList<HBox> arg) {
 		((Button)arg.get(arg.size() - 1).getChildren().get(0)).setOnAction(e -> {
 
@@ -55,14 +48,14 @@ public class NewLocation extends VBox implements LayoutHelper{
 				// Show an error message if the name is empty
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setHeaderText("Error");
-				alert.setContentText("Location name can not be empty!");
+				alert.setContentText("Category name can not be empty!");
 				alert.showAndWait();
 			} else {
 				// Save the category name to a .csv file
-				this.getInfo();
+				category.setName(name);
 				saveCategoryToCsv();
 				//clear TextField
-				clearTextField((TextField)arg.get(1).lookup("#text"), (TextField)arg.get(2).lookup("#text"));
+				clearTextField((TextField)arg.get(1).lookup("#text"));
 			}
 			
 		});
@@ -76,30 +69,29 @@ public class NewLocation extends VBox implements LayoutHelper{
 				// If it exists, append the new category to the file
 				try (FileWriter writer = new FileWriter(file, true)) {
 					writer.append("\n");
-					writer.append(location.saveToCsv());
+					writer.append(category.saveToCsv());
 				}
 			} else {
 				// If the file doesn't exist, create it and write the header row
 				try (FileWriter writer = new FileWriter(file)) {
-					writer.append("Location Name,Description");
+					writer.append("Category Name");
 				}
 
 				// Then append the new category to the file
 				saveCategoryToCsv();
-				// prevent second msg
 				return;
 			}
 
 			// Show a success message
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setHeaderText("Success");
-			alert.setContentText("Location created successfully.");
+			alert.setContentText("Category created successfully.");
 			alert.showAndWait();
 		} catch (IOException ex) {
 			// Show an error message if there was a problem saving the category
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Error");
-			alert.setContentText("There was a problem saving the location.");
+			alert.setContentText("There was a problem saving the category.");
 			alert.showAndWait();
 		}
 	}

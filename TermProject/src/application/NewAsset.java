@@ -1,5 +1,9 @@
 package application;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -25,7 +29,7 @@ public class NewAsset extends VBox implements LayoutHelper{
 	 */
 	private Asset asset = new Asset();
 	
-	private HashMap<String, Category> category = new HashMap<String, Category>();;
+	private HashMap<String, Category> category = new HashMap<String, Category>();
 	private HashMap<String, Location> location = new HashMap<String, Location>();
 	private final String file = "asset.csv";
 	
@@ -48,12 +52,12 @@ public class NewAsset extends VBox implements LayoutHelper{
 		setExample();
 		
         layout.add(createTitle(title));
-        layout.add(createTextFieldLine(line1, true));
+        layout.add(createTextLine(line1, true));
         layout.add(createDropdownList(line2, category));
         layout.add(createDropdownList(line3, location));
         layout.add(createDatePicker(line4));
-        layout.add(createTextAreaLine(line5));
-        layout.add(createTextFieldLine(line6));
+        layout.add(createTextLine(line5));
+        layout.add(createTextLine(line6));
         layout.add(createDatePicker(line7));
         layout.add(lastLine());
         
@@ -102,7 +106,7 @@ public class NewAsset extends VBox implements LayoutHelper{
 			} else {
 				// Save the category name to a .csv file
 				this.getInfo();
-				//saveCategoryToCsv();
+				saveAssetToCsv();
 				System.out.println(asset.saveToCsv());
 				//
 			}
@@ -122,8 +126,40 @@ public class NewAsset extends VBox implements LayoutHelper{
 		//ex2.display();
 	}
 	
-	private <E> void readCSV(HashMap<String, E> arg) {
-		
+	private void saveAssetToCsv() {
+		try {
+			// Check if the file exists
+			if (Files.exists(Paths.get(file))) {
+				// If it exists, append the new category to the file
+				try (FileWriter writer = new FileWriter(file, true)) {
+					writer.append("\n");
+					writer.append(asset.saveToCsv());
+				}
+			} else {
+				// If the file doesn't exist, create it and write the header row
+				try (FileWriter writer = new FileWriter(file)) {
+					writer.append("Asset Name,Category,Location,Purchase Date,Description,Purchase Value,Warranty Exp Date");
+				}
+
+				// Then append the new category to the file
+				saveAssetToCsv();
+				// prevent second msg
+				return;
+			}
+
+			// Show a success message
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Success");
+			alert.setContentText("Asset created successfully.");
+			alert.showAndWait();
+		} catch (IOException ex) {
+			// Show an error message if there was a problem saving the category
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Error");
+			alert.setContentText("There was a problem saving the asset.");
+			alert.showAndWait();
+		}
 	}
+	
 
 }

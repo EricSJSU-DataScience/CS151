@@ -29,7 +29,7 @@ public class NewCategory extends VBox implements LayoutHelper {
 		super.setPadding(new Insets(40, 40, 40, 40));
  
 		layout.add(createTitle(title));
-		layout.add(createTextFieldLine(line1, true));
+		layout.add(createTextLine(line1, true));
 		layout.add(lastLine());
 
 		initialize(this, layout);
