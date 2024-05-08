@@ -20,7 +20,7 @@ public class NewCategory extends VBox implements LayoutHelper {
 	private final String file = "category.csv";
 
 	private ArrayList<HBox> layout = new ArrayList<HBox>();
-	private final String title = "Create New TestPage";
+	private final String title = "Create New Category";
 	private final String line1 = "Category's name: ";
 
 

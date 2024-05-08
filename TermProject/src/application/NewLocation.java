@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.Location;
@@ -44,7 +45,7 @@ public class NewLocation extends VBox implements LayoutHelper{
 	
 	public void getInfo() {
 		location.setName(((TextField) layout.get(1).lookup("#text")).getText());
-		location.setDesciption(((TextField) layout.get(2).lookup("#text")).getText());
+		location.setDesciption(((TextArea) layout.get(2).lookup("#text")).getText());
 	}
 	
 	private void buttonAction(ArrayList<HBox> arg) {
@@ -62,7 +63,8 @@ public class NewLocation extends VBox implements LayoutHelper{
 				this.getInfo();
 				saveToCsv();
 				//clear TextField
-				clearTextField((TextField)arg.get(1).lookup("#text"), (TextField)arg.get(2).lookup("#text"));
+				clearTextField((TextField)arg.get(1).lookup("#text"));
+				clearTextArea((TextArea)arg.get(2).lookup("#text"));
 			}
 			
 		});

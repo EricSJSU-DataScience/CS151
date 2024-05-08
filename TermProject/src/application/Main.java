@@ -8,13 +8,14 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	final private String appName = "SortYourLife";
+	final private String appName = "QuickSort";
 
 	private StackPane rightSection = new StackPane();
 
 	private WelcomePage welcomePage = new WelcomePage();
 	private NewCategory newCategory = new NewCategory();
 	private NewLocation newLocation = new NewLocation();
+	private AssetManagement manageAsset = new AssetManagement();
 	private NewAsset newAsset = new NewAsset();
 	
 	//Testing Page for single element
@@ -25,6 +26,7 @@ public class Main extends Application {
 		newCategory.setVisible("New Category Page".equals(choice));
 		newLocation.setVisible("New Location Page".equals(choice));
 		newAsset.setVisible("New Asset".equals(choice));
+		manageAsset.setVisible("Asset Management".equals(choice));
 		//test page
 		//test.setVisible("Reports Page".equals(choice));
 	});
@@ -34,6 +36,7 @@ public class Main extends Application {
 		newCategory.setVisible("New Category Page".equals(choice));
 		newLocation.setVisible("New Location Page".equals(choice));
 		newAsset.setVisible("New Asset Page".equals(choice));
+		manageAsset.setVisible("Asset Management".equals(choice));
 		homeNavigator.setVisible(!welcomePage.isVisible());
 		//test page
 		//test.setVisible("Reports Page".equals(choice));
@@ -41,14 +44,14 @@ public class Main extends Application {
 
 	public void start(Stage primaryStage) throws Exception {
 		
-		rightSection.getChildren().addAll(welcomePage, newCategory, newLocation, newAsset, homeNavigator);
+		rightSection.getChildren().addAll(welcomePage, newCategory, newLocation, newAsset, manageAsset , homeNavigator);
 		initializePage();
 
 		//rightSection.getChildren().add(test);
 		//test.setVisible(false);
 		
 		HBox mainBkgd = new HBox();
-		mainBkgd.getChildren().addAll(navigationMenu, rightSection);
+		mainBkgd.getChildren().addAll(rightSection, navigationMenu);
 
 		Scene scene = new Scene(mainBkgd, 800, 600);
 		primaryStage.setScene(scene);
@@ -58,15 +61,17 @@ public class Main extends Application {
 	}
 
 	public void initializePage() {
-		rightSection.setAlignment(Pos.TOP_LEFT);
+		rightSection.setAlignment(Pos.TOP_RIGHT);
 		// initialize with welcome page
 		rightSection.getChildren().get(0).setVisible(true);
 		// other page not visible
 		rightSection.getChildren().get(1).setVisible(false);
 		rightSection.getChildren().get(2).setVisible(false);
 		rightSection.getChildren().get(3).setVisible(false);
-		// home navigatior
 		rightSection.getChildren().get(4).setVisible(false);
+		
+		// home navigatior
+		rightSection.getChildren().get(5).setVisible(false);
 		
 		//Test page visible
 		

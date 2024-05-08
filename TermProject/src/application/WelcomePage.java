@@ -17,10 +17,10 @@ public class WelcomePage extends VBox {
 
 		// Welcome message + app name
 		welcomeMessage = textMessage("Welcome to", 40);
-		appName = textMessage("SortYourLife", 48);
+		appName = textMessage("QuickSort", 48);
 
 		// App Logo
-		logo = new ImageView(new Image(getClass().getResourceAsStream("/application/resources/art_Logo.png")));
+		logo = new ImageView(new Image(getClass().getResourceAsStream("/application/resources/logo.png")));
 
 		initialize();
 
@@ -35,7 +35,7 @@ public class WelcomePage extends VBox {
 
 	public Text textMessage(String arg, int size) {
 		Text text = new Text(arg);
-		text.setFont(Font.font("Arial", size));
+		text.setFont(Font.font("Helvetica", size));
 
 		return text;
 	}

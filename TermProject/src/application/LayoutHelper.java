@@ -52,7 +52,7 @@ public interface LayoutHelper {
 	public default HBox createTitle(String arg) {
 		HBox title = new HBox();
 		Text titleText = new Text(arg);
-		titleText.setFont(Font.font("Arial", 30));
+		titleText.setFont(Font.font("Helvetica", 30));
 
 		title.getChildren().add(titleText);
 		title.setAlignment(Pos.BASELINE_CENTER);
@@ -66,7 +66,7 @@ public interface LayoutHelper {
 	 */
 	public default Label createLabel(String arg) {
 		Label label = new Label(arg);
-		label.setFont(Font.font("Arial", 20));
+		label.setFont(Font.font("Helvetica", 20));
 		label.setPrefWidth(190);
 		
 		return label;
@@ -198,6 +198,12 @@ public interface LayoutHelper {
 	 */
 	public default void clearTextField(TextField...arg) {
 		for (TextField itr : arg) {
+			itr.clear();
+		}
+	}
+	
+	public default void clearTextArea(TextArea...arg) {
+		for (TextArea itr : arg) {
 			itr.clear();
 		}
 	}

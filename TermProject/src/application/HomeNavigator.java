@@ -1,13 +1,12 @@
 package application;
 
 import java.util.function.Consumer;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 
@@ -19,10 +18,10 @@ public class HomeNavigator extends VBox {
 		super(30); // spacing parameter 30
 		super.setPadding(new Insets(10, 10, 10, 10));
 
-		Circle circle = new Circle(48);
+		Rectangle rect = new Rectangle(48, 5);
 		Group arrow = arrowShape();
 
-		homeNavigator = createButton(circle, arrow);
+		homeNavigator = createButton(rect, arrow);
 
 		initialize();
 		buttonAction(choice);
